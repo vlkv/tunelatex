@@ -1,0 +1,109 @@
+%% Новые команды, предоставляемые пакетом:
+%% \hl --- выделение текста красным цветом
+%% \dup --- дублирование символов операций в матем. формулах, если формула переносится на след. строку
+%% \wtodo --- TODO-заметка белого цвета
+%% \ytodo --- TODO-заметка желтого цвета
+%% \rtodo --- TODO-заметка красного цвета
+%% \figheight --- Стандартная высота одиночной картинки
+%% \figwidth --- Стандартная ширина одиночной картинки
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{vlkv_stuff}[2010/04/10 Collection of my usefull commands]
+
+\RequirePackage{ifthen}
+
+%Значения по умолчанию
+\newcommand{\@disabletodonotes}{false}
+\newcommand{\@mode}{pdf}
+
+\DeclareOption{disabletodonotes}{\renewcommand\@disabletodonotes{true}}
+\DeclareOption{pdf}{\renewcommand\@mode{pdf}}
+\DeclareOption{dvi}{\renewcommand\@mode{dvi}}
+\ProcessOptions\relax
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Математические расширения
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\RequirePackage{amssymb}
+%\RequirePackage{amsmath}
+\providecommand{\eqref}[1]{(\ref{#1})} %Такая команда есть в amsmath
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Моя команда \hl для выделения текста цветом. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\providecommand{\hl}[1]{\textcolor{red}{#1}} %Команда textcolor из пакета color
+%Чтобы эта команда ничего не делала можно ее "отключить" вот так:
+%\newcommand{\hl}[1]{#1}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%Подключаем todonotes
+%%%%%%%%%%%%%%%%%%%%%%
+\ifthenelse{\equal{\@disabletodonotes}{true}}
+{
+	%Это мои команды, отключаю их самостоятельно
+	\providecommand{\wtodo}[2][]{}
+	\providecommand{\ytodo}[2][]{}
+	\providecommand{\rtodo}[2][]{}
+	
+	
+	%Возможно, вот это --- самое правильное отключение
+	\RequirePackage[disable]{todonotes}
+	
+	%Можно и так, но тогда нужно отключать все команды из todonotes, а не только \listoftodos
+	%\providecommand{\listoftodos}[1][]{}	
+}
+{
+	\ifthenelse{\equal{\@mode}{pdf}}
+	{
+		\RequirePackage[
+			textsize=scriptsize,
+			textwidth=2.8cm,
+			linecolor=black!40,
+			bordercolor=black!40,
+			colorinlistoftodos]{todonotes}
+	}{}
+	
+	\ifthenelse{\equal{\@mode}{dvi}}
+	{
+		\RequirePackage[
+			dvistyle,		
+			textsize=scriptsize,
+			textwidth=2.8cm,
+			linecolor=black!40,
+			colorinlistoftodos]{todonotes}
+	}{}
+	
+	%Удобные команды для разноцветных todo-заметок
+	\providecommand{\wtodo}[2][]{\todo[caption={#2}, backgroundcolor=white,  #1]{\renewcommand{\baselinestretch}{1.0}\selectfont#2\par}}
+	\providecommand{\ytodo}[2][]{\todo[caption={#2}, backgroundcolor=yellow!30,  #1]{\renewcommand{\baselinestretch}{1.0}\selectfont#2\par}}
+	\providecommand{\rtodo}[2][]{\todo[caption={#2}, backgroundcolor=red!30,  #1]{\renewcommand{\baselinestretch}{1.0}\selectfont#2\par}}
+	
+	%Чтобы вставить список всех todo-заметок в документ, есть команда \listoftodos[TODO-список]
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Константы, определяющие стандартные размеры одиночных картинок
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\providecommand{\figheight}{10cm}
+\providecommand{\figwidth}{12cm}
+\providecommand{\figsmheight}{7cm}
+\providecommand{\figsmwidth}{5cm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Этот пакет делает в оглавлении гиперссылки
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Нецветные ссылки без рамок:
+\RequirePackage[pdfborder={0 0 0},unicode=true]{hyperref}
+%Цветные ссылки без рамок:
+%\RequirePackage[colorlinks=false]{hyperref}
+
+
+
+\RequirePackage{tabularx}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
+
+
