@@ -244,43 +244,6 @@
 %\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.}% Меняем везде перечисления на цифра.цифра
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Команды для дублирования матем. символов операций при переносе строки
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%Это просто заготовка, которая ничего не делает
-\providecommand{\hm}[1]{#1}
-
-%% Способ первый
-\renewcommand{\hm}[1]{#1\nobreak\discretionary{}{\hbox{\ensuremath{#1}}}{}}
-%% Нужно прямо перед символом, который возможно будет перенесён на другую строчку,
-%% поставить команду \hm. Например, вот так: $$ a \hm+ b \hm= c $$.
-%% При этом, если LaTeX не нужно будет переносить формулу на этом символе --- он дублироваться не будет.
-%% Этот способ взят из документа Владимира Сюткина, Набор математических формул в LaTeX2e, 2002
-
-%% Способ второй (альтернативный)
-%\renewcommand{\hm}[1]{#1\nobreak\discretionary{}{\hbox{$\mathsurround=0pt #1$}}{}}
-%% Его использовать вот так: $$ a + b \hm{=} c $$
-%% Хотя наверное можно и без фигурных скобок $$a + b \hm= c $$
-%% Второй способ (Рецепт от Евгения Миньковского из fido7.ru.tex, который я нашел в lusr.pdf Е.М.Балдина)
-
-%Способ третий (автоматический?) Еще не пробовал
-%begin{latexonly}
-%\renewcommand\ne{\mathchar"3236\mathchar"303D\nobreak
-%\discretionary {}{\ us e f ont {OMS}{cmsy}{m}{n}\char"36\ us e f ont
-%{OT1}{cmr}{m}{n}\char"3D}{}} \begingroup
-%\catcode ‘\+\ active \gdef+{\mathchar8235\nobreak\discretionary {}%
-%{\ us e f ont {OT1}{cmr}{m}{n}\char 43}{}}
-%\catcode ‘\􀀀\ active \gdef􀀀{\mathchar8704\nobreak\discretionary {}%
-%{\ us e f ont {OMS}{cmsy}{m}{n}\char 0}{}}
-%\catcode ‘\=\ active \gdef={\mathchar12349\nobreak\discretionary {}%
-%{\ us e f ont {OT1}{cmr}{m}{n}\char 61}{}} \endgroup
-%\def\cdot{\mathchar8705\nobreak\discretionary {}%
-%{\ us e f ont {OMS}{cmsy}{m}{n}\char 1}{}}
-%\def\times{\mathchar8706\nobreak\discretionary {}%
-%{\ us e f ont {OMS}{cmsy}{m}{n}\char 2}{}}
-%\mathcode‘\==32768 \mathcode‘\+=32768 \mathcode‘\-=32768
-%end{latexonly}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
