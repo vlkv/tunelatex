@@ -1,11 +1,11 @@
-%%
+%%%%%%%%%%%%%%%%%%%%%
 %% Author: Vitaly V. Volkov
 %% Email: vitvlkv@gmail.com
 %% 
-%%
+%%%%%%%%%%%%%%%%%%%%%
 
 \NeedsTeXFormat{LaTeX2e} %В XeLaTeX этот класс тоже можно использовать
-\ProvidesClass{vlkv_thesis}[2010/03/29 My custom class for thesis writing]
+\ProvidesClass{vlkv_thesis}[2010/03/29 My custom document class for my thesis writing]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Мой класс основан на стандартном report
@@ -16,7 +16,7 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Устанавливаем размеры шрифта основного текста
+% Устанавливаем размеры шрифтов
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \renewcommand{\tiny}{\fontsize{7}{7}\selectfont}
 \renewcommand{\scriptsize}{\fontsize{10}{10}\selectfont}
@@ -115,7 +115,7 @@
 []
 
 % Кстати пакет titlesec позволяет кажется настраивать стили заголовков в содержании.
-% Также он может настраивать разные отступы после заголовков и т.п. Вобщем на CTAN есть документация по titlesec.
+% Также он может настраивать разные отступы после заголовков и т.п. Вобщем на CTAN можно почитать документацию к нему.
 
 %%%%%%%%%%%%%
 % Приложения
@@ -127,12 +127,13 @@
 \newcounter{appchapter} %Счётчик для нумерации приложений (буквами)
 \renewcommand{\theappchapter}{\Asbuk{appchapter}} 
 %\Asbuk это команда из пакета babel (с опцией russian)
-%Я вроде как babel нигде не подключал еще, откуда LaTeX знает про эту команду???
+%Я вроде как babel нигде не подключал еще, откуда LaTeX уже знает про эту команду???
 
 %Команда \appchapter для форматирования заголовков приложений
 \providecommand{\appchapter}[1]{%
     \refstepcounter{appchapter}%
-    \clearpage
+	\addcontentsline{toc}{chapter}{\appendixname\ \theappchapter. #1}    
+	\clearpage	
     \vspace*{24 pt}
     {
         \parindent=0pt
@@ -143,7 +144,6 @@
         \nopagebreak
         \vspace{16 pt}
     }
-    \addcontentsline{toc}{chapter}{\appendixname\ \theappchapter. #1}
 }
 
 \newcounter{appsection}[appchapter]
@@ -154,6 +154,7 @@
 %                                    {\normalfont\Large\bfseries}}
 \providecommand{\appsection}[1]{%
     \refstepcounter{appsection}%
+	\addcontentsline{toc}{section}{\theappsection \hspace{1em} #1}
     \vspace{18 pt}{
         \parindent=0pt
         \Large\sffamily\bfseries
@@ -162,7 +163,6 @@
         \nopagebreak
         \vspace{10 pt}        
     }
-    \addcontentsline{toc}{section}{\theappsection \hspace{1em} #1}
 }
 
 
@@ -218,15 +218,15 @@
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Защита от "висячих" строк (однако, не 100%-ая)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clubpenalty=9999  %Почему-то очень не советуют ставить 10000
 \widowpenalty=9999 %Почему-то очень не советуют ставить 10000
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Параметр, задающий степень максимальной разреженности строк
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \tolerance=500 %По умолчанию вроде-ка стоит 200
 %Этот параметр позволяет иногда избежать ситуации, когда внутритекстовая формула
 %вылезает на поля страницы (вместо того, чтобы перенестись на следующую строку).
@@ -308,5 +308,15 @@
 \RequirePackage[perpage]{footmisc}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Настройка формата нумерации страниц
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage{fancyhdr}
+\fancypagestyle{plain}{% Модифицируем стиль plain, который используется в LaTeX по умолчанию на каждой странице, где начинается новая глава chapter или section
+\fancyhf{} % clear all header and footer fields
+\fancyhead[C]{\thepage} %Номер страницы вверху по центру
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+\pagestyle{plain}
 
 

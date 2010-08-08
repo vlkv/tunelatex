@@ -4,6 +4,7 @@
 %% \wtodo --- TODO-заметка белого цвета
 %% \ytodo --- TODO-заметка желтого цвета
 %% \rtodo --- TODO-заметка красного цвета
+%% \eqref --- Ссылка на формулу в круглых скобках
 %% \figheight --- Стандартная высота одиночной картинки
 %% \figwidth --- Стандартная ширина одиночной картинки
 
@@ -29,9 +30,13 @@
 \providecommand{\eqref}[1]{(\ref{#1})} %Такая команда есть в amsmath
 
 
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Моя команда \hl для выделения текста цветом. 
+% Мои команды для выделения текста цветом. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\RequirePackage{color}
 %\providecommand{\hl}[1]{\textcolor{red}{#1}} %Команда textcolor из пакета color
 %Чтобы эта команда ничего не делала можно ее "отключить" вот так:
 %\newcommand{\hl}[1]{#1}
@@ -46,7 +51,6 @@
 	\providecommand{\wtodo}[2][]{}
 	\providecommand{\ytodo}[2][]{}
 	\providecommand{\rtodo}[2][]{}
-	
 	
 	%Возможно, вот это --- самое правильное отключение
 	\RequirePackage[disable]{todonotes}
@@ -76,26 +80,38 @@
 	}{}
 	
 	%Удобные команды для разноцветных todo-заметок
-	\providecommand{\wtodo}[2][]{\todo[caption={#2}, backgroundcolor=white,  #1]{\renewcommand{\baselinestretch}{1.0}\selectfont#2\par}}
-	\providecommand{\ytodo}[2][]{\todo[caption={#2}, backgroundcolor=yellow!30,  #1]{\renewcommand{\baselinestretch}{1.0}\selectfont#2\par}}
-	\providecommand{\rtodo}[2][]{\todo[caption={#2}, backgroundcolor=red!30,  #1]{\renewcommand{\baselinestretch}{1.0}\selectfont#2\par}}
+	\providecommand{\wtodo}[2][]%
+	{%
+		\todo[caption={#2}, backgroundcolor=white,  #1]%
+		{\renewcommand{\baselinestretch}{1.0}\selectfont#2\par}%
+	}
+	\providecommand{\ytodo}[2][]%
+	{%
+		\todo[caption={#2}, backgroundcolor=yellow!30,  #1]%
+		{\renewcommand{\baselinestretch}{1.0}\selectfont#2\par}%
+	}
+	\providecommand{\rtodo}[2][]%
+	{%
+		\todo[caption={#2}, backgroundcolor=red!30,  #1]%
+		{\renewcommand{\baselinestretch}{1.0}\selectfont#2\par}%
+	}
 	
 	%Чтобы вставить список всех todo-заметок в документ, есть команда \listoftodos[TODO-список]
 }
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Константы, определяющие стандартные размеры одиночных картинок
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \providecommand{\figheight}{10cm}
 \providecommand{\figwidth}{12cm}
-\providecommand{\figsmheight}{7cm}
+\providecommand{\figsmheight}{7cm}% sm --- маленький размер (small)
 \providecommand{\figsmwidth}{5cm}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Этот пакет делает в оглавлении гиперссылки
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Нецветные ссылки без рамок:
 \RequirePackage[pdfborder={0 0 0},unicode=true]{hyperref}
 %Цветные ссылки без рамок:
