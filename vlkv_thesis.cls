@@ -84,7 +84,7 @@
 
 %Главы (команда \chapter)
 \titleformat{\chapter}[display]%Какой заголовок и какую "заготовку" оформления для него выбрать
-{\LARGE\sffamily\bfseries}%Это семейство и стиль шрифта для всего заголовка
+{\Large\sffamily\bfseries}%Это семейство и стиль шрифта для всего заголовка
 {\chaptertitlename~\thechapter}%Это непосредственно формат номера заголовка. \chaptertitlename это слово "Глава"
 {1em}%Расстояние между номером и текстом заголовка
 {}%Это применяется до текста заголовка
@@ -92,7 +92,7 @@
 
 %Разделы (команда \section)
 \titleformat{\section}[hang]
-{\Large\sffamily\bfseries} 
+{\large\sffamily\bfseries} 
 {\thesection}
 {1em}
 {} 
@@ -100,7 +100,7 @@
 
 %Подразделы (команда \subsection)
 \titleformat{\subsection}[hang]
-{\large\sffamily\bfseries}
+{\normalsize\sffamily\bfseries}
 {\thesubsection}
 {1em}
 {}
@@ -108,11 +108,18 @@
 
 %Подподразделы (команда \subsubsection)
 \titleformat{\subsubsection}[hang]
-{\normalsize\sffamily\bfseries}
+{\normalsize\rmfamily\bfseries\itshape}
 {\thesubsubsection}
 {1em}
 {}
 []
+%Параграфы (команда \paragraph)
+\titleformat{\paragraph}[runin]
+{\normalsize\rmfamily\bfseries}
+{\thesubsubsection}
+{1em}
+{\hspace{\parindent}}
+[.{ }]
 
 % Кстати пакет titlesec позволяет кажется настраивать стили заголовков в содержании.
 % Также он может настраивать разные отступы после заголовков и т.п. Вобщем на CTAN можно почитать документацию к нему.
