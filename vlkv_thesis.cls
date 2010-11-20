@@ -116,7 +116,7 @@
 %Параграфы (команда \paragraph)
 \titleformat{\paragraph}[runin]
 {\normalsize\rmfamily\bfseries}
-{\thesubsubsection}
+{\theparagraph}
 {1em}
 {\hspace{\parindent}}
 [.{ }]
