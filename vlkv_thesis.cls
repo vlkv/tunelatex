@@ -84,7 +84,7 @@
 
 %Главы (команда \chapter)
 \titleformat{\chapter}[display]%Какой заголовок и какую "заготовку" оформления для него выбрать
-{\Large\sffamily\bfseries}%Это семейство и стиль шрифта для всего заголовка
+{\Large\rmfamily\bfseries}%Это семейство и стиль шрифта для всего заголовка
 {\chaptertitlename~\thechapter}%Это непосредственно формат номера заголовка. \chaptertitlename это слово "Глава"
 {1em}%Расстояние между номером и текстом заголовка
 {}%Это применяется до текста заголовка
@@ -92,7 +92,7 @@
 
 %Разделы (команда \section)
 \titleformat{\section}[hang]
-{\large\sffamily\bfseries} 
+{\large\rmfamily\bfseries} 
 {\thesection}
 {1em}
 {} 
@@ -100,7 +100,7 @@
 
 %Подразделы (команда \subsection)
 \titleformat{\subsection}[hang]
-{\normalsize\sffamily\bfseries}
+{\normalsize\rmfamily\bfseries}
 {\thesubsection}
 {1em}
 {}
